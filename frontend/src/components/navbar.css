@@ -1,0 +1,29 @@
+/* Navbar.css */
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #3498db;
+    padding: 15px 20px;
+    margin: 0 auto;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 30px;
+  }
+  
+  .navbar > .nav-links > .nav-link {
+    color: #fff;
+    text-decoration: none;
+    font-size: 18px;
+    transition: color 0.3s;
+    width: 100px;
+    text-align: center;
+  }
+  
+  .active-link {
+    color: #2c3e50; /* Color for the active link */
+  }
+  
