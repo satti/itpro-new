@@ -1,0 +1,35 @@
+.staff-form {
+    width: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.staff-form, input {
+    padding: 12px;
+    margin: 1px solid blue;
+    font-size: 16px;
+    margin: 10px;
+    width: 300px;
+}
+
+.staff-button {
+    border: 1px solid teal;
+    border-radius: 3px;
+    padding: 10px 20px;
+    background-color: teal;
+    color: white;
+    font-weight: 600;
+}
+
+button:hover {
+    background-color: blue;
+}
+
+select {
+    padding: 12px;
+    margin: 1px solid blue;
+    font-size: 16px;
+    margin: 10px;
+    width: 300px;   
+}

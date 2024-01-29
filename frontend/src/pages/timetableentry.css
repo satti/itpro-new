@@ -1,0 +1,14 @@
+.timetable-container{
+    width: 600px;
+    background-color: #f2f2f2;
+    height: 500px;
+    border: 1px solid darkgrey;
+    border-radius: 10px;
+}
+input[type='text'], select{
+    width: 100%;
+    padding: 10px;
+    margin: 5px;
+    display: inline-block;
+    box-sizing: border-box;
+}

@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
+import './StaffEntry.css'
 
 const StaffEntry = () => {
     const [staffid,setStaffId] = useState('')
@@ -27,7 +28,7 @@ const StaffEntry = () => {
             <h1>
             Staff Entry:
             </h1>
-            <div>
+            <div className='staff-form'>
             <form onSubmit={handleSubmit}>
                 <label>Staff Id:
                     <input type='text' name="staff-id" value={staffid} onChange={(e)=>setStaffId(e.target.value)}/>
@@ -35,7 +36,7 @@ const StaffEntry = () => {
                 <label>Staff Name:
                     <input type='text' name="staff-name" value={name} onChange={(e)=>setName(e.target.value)}/>
                 </label>
-                <button type='submit'> Submit </button>            
+                <button className='staff-button' type='submit'> Submit </button>            
                 </form>
             </div>
     </div>

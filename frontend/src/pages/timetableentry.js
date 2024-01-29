@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-
+import './timetableentry.css';
 
 const TimeTableEntry = () => {
     const [staffs,setStaffs] = useState([])
@@ -48,41 +48,40 @@ const TimeTableEntry = () => {
     }
 
     return (
-        <div className='container'>
+        <div className='timetable-container'>
+            <div className='timetable-form'>
             <h1>
                 Time Table Entry:
             </h1>
             <form onSubmit={handleSubmit}>
-                <label>
-                    Faculty Name:
-                    <select value={staffId} onChange={(e)=>setStaffId(e.target.value)}>
-                        <option></option>
+                <label for='fname'>
+                    Faculty Name:</label>
+                    <select value={staffId} id='fname' onChange={(e)=>setStaffId(e.target.value)}>
+                        <option>Select</option>
                         {staffs.map((staf,index)=>{
                         return (<option value={staf.id} id={staf.staffid} key={index}>{staf.name}</option>)        
                         })}
                     </select>
-                </label>
-                <label>Day :
-                    <select value={day} onChange={(e)=>setDay(e.target.value)}>
-                        <option></option>
+                
+                <label for='dayid'>Day :</label>
+                    <select id='dayid' value={day} onChange={(e)=>setDay(e.target.value)}>
+                        <option>Select</option>
                         {days.map((day,index)=>{
                         return (<option value={day} id={index} key={index}>{day}</option>)        
                         })}
                     </select>
-                </label>
-                <label>Starting Time:
-                    <input type="time" min="9:40" max="16:20" value={startTime} onChange={(e)=>setStartTime(e.target.value)}/>
-                </label>
-                <label>Ending Time:
-                <input type='time' min="9:40" max="16:20" value={endTime} onChange={(e)=>setEndTime(e.target.value)}
+                <label for='startingtime'>Starting Time: </label>
+                    <input type="time" id='startingtime'min="9:40" max="16:20" value={startTime} onChange={(e)=>setStartTime(e.target.value)}/>
+                
+                <label for='endingtime'>Ending Time:</label>
+                <input type='time' id='endingtime' min="9:40" max="16:20" value={endTime} onChange={(e)=>setEndTime(e.target.value)}
                 />
-                </label>
-                <label>Starting Date:
-                    <input type='date' value={startDate} onChange={(e)=>setStartDate(e.target.value)}/>
-                </label>
+                <label for='startingdate'>Starting Date: </label>
+                    <input type='date' id='startingdate' value={startDate} onChange={(e)=>setStartDate(e.target.value)}/>
+                
                 <button type='submit'> Submit </button>            
                 </form>
-            
+            </div>
         </div>
     );
 }
