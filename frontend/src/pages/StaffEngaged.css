@@ -1,23 +1,24 @@
-.staff-form {
-    position: absolute;
-    /* display: flex;
-    justify-content: center;
-    align-items: center; */
+.staffengaged {
+    position: relative;
+    display: block;
+}
 
-    width: 30%;
-    height: 45%;
+.engaged-form {
+    position: relative;
     top:0px;
     bottom:0px;
     left:0px;
     right:0px;
     margin: auto;
+    width: 30%;
+    height: 15%;
     text-align: center;
     background-color: rgb(250, 249, 249);
     border-color: 2px solid black;
     border-radius: 5px;
 }
 
-.staff-form input {
+.engaged-form input {
     width: 300px;
     padding: 10px;
     border: 2px solid rgb(154, 154, 224);
@@ -26,19 +27,19 @@
     background-color: azure;
 }
 
-div label{
+.engaged-form label{
     width: 300px;
     font-size: 18px;
     text-align: left;
 }
 
-.staff-form h1{
+.engaged-form h1{
     width: 100%;
-    font-size: 50px;
+    font-size: 30px;
     color: navy;
 }
 
-.staff-form button {
+.engaged-form button {
     width: 300px;
     background-color: teal;
     color: white;
@@ -46,4 +47,8 @@ div label{
     font-size: larger;
     font-weight: 600px;
     margin-top: 15px;
+}
+.engaged-table {
+    position: relative;
+    margin: 0 30px;
 }

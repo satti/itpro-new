@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import axios from 'axios'
+import './StaffEngaged.css'
 const StaffEngaged = () => {
   
   const [selectedDate,setSelectedDate] = useState('')
@@ -33,15 +34,19 @@ const StaffEngaged = () => {
   }
 
   return (
-    <div className='container'>
+    <>
+    <div className='staffengaged'>
+    <div className='engaged-form'>
       <form onSubmit={getStaffEngagedData}>
+      <h1>DateWise Staff Engaged List: </h1>
       <input type="date" 
       value={selectedDate} 
       onChange={(e)=>setSelectedDate(e.target.value)}></input>
       <button type='submit'>Get</button>
       </form>
-      <div>
-        <h1>DateWise Staff Engaged List: </h1>
+      </div>
+      <div className='engaged-table'>
+        
         <table className="table table-light table-striped">
   <thead>
     <tr>
@@ -68,8 +73,8 @@ const StaffEngaged = () => {
   </tbody>
 </table>
       </div>
-    </div>
-    
+      </div>
+    </>
   )
 }
 

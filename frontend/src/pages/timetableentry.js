@@ -47,13 +47,13 @@ const TimeTableEntry = () => {
         }
     }
 
-    return (
-        <div className='timetable-container'>
+    return (<>
             <div className='timetable-form'>
+           
+            <form onSubmit={handleSubmit}>
             <h1>
                 Time Table Entry:
             </h1>
-            <form onSubmit={handleSubmit}>
                 <label for='fname'>
                     Faculty Name:</label>
                     <select value={staffId} id='fname' onChange={(e)=>setStaffId(e.target.value)}>
@@ -82,7 +82,7 @@ const TimeTableEntry = () => {
                 <button type='submit'> Submit </button>            
                 </form>
             </div>
-        </div>
+            </>
     );
 }
 

@@ -1,14 +1,57 @@
-.timetable-container{
-    width: 600px;
-    background-color: #f2f2f2;
-    height: 500px;
-    border: 1px solid darkgrey;
-    border-radius: 10px;
+.timetable-form{
+    position: absolute;
+    /* display: flex;
+    justify-content: center;
+    align-items: center; */
+
+    width: 35%;
+    height: 65%;
+    top:0px;
+    bottom:0px;
+    left:0px;
+    right:0px;
+    margin: auto;
+    text-align: center;
+    background-color: rgb(250, 249, 249);
+    border-color: 2px solid black;
+    border-radius: 5px;
 }
-input[type='text'], select{
-    width: 100%;
+
+.timetable-form input {
+    width: 300px;
     padding: 10px;
-    margin: 5px;
-    display: inline-block;
-    box-sizing: border-box;
+    border: 2px solid rgb(154, 154, 224);
+    font-size: 18px;
+    border-radius: 5px;
+    background-color: azure;
+}
+
+div select {
+    width: 300px;
+    padding: 10px;
+    border: 2px solid rgb(154, 154, 224);
+    font-size: 18px;
+    border-radius: 5px;
+    background-color: azure;
+}
+
+div label{
+    width: 300px;
+    font-size: 18px;
+    text-align: left;
+}
+.timetable-form h1{
+    width: 100%;
+    font-size: 50px;
+    color: navy;
+}
+
+.timetable-form button {
+    width: 300px;
+    background-color: teal;
+    color: white;
+    padding: 10px;
+    font-size: larger;
+    font-weight: 600px;
+    margin-top: 15px;
 }

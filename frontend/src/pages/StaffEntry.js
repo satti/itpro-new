@@ -24,12 +24,13 @@ const StaffEntry = () => {
         }
     }
   return (
-    <div className='container'>
+    <>
+           
+            <div className='staff-form'>
+            <form onSubmit={handleSubmit}>
             <h1>
             Staff Entry:
             </h1>
-            <div className='staff-form'>
-            <form onSubmit={handleSubmit}>
                 <label>Staff Id:
                     <input type='text' name="staff-id" value={staffid} onChange={(e)=>setStaffId(e.target.value)}/>
                 </label>
@@ -39,7 +40,7 @@ const StaffEntry = () => {
                 <button className='staff-button' type='submit'> Submit </button>            
                 </form>
             </div>
-    </div>
+    </>
   )
 }
 
