@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from rest_framework import viewsets
 from .models import Staff,Timetable
-from .serializers import TimetableSerializer, StaffSerializer
+from .serializers import TimetableSerializer, StaffSerializer,TimetableCreateSerializer
 from rest_framework.response import Response
 from django.utils import timezone
 from rest_framework import status
@@ -15,6 +15,12 @@ class StaffViewSet(viewsets.ModelViewSet):
 class TimetableViewSet(viewsets.ModelViewSet):
     queryset = Timetable.objects.all()
     serializer_class = TimetableSerializer
+
+    def get_serializer_class(self):
+        if self.action == 'duplicate_check':
+            return TimetableCreateSerializer
+        else:
+            return TimetableSerializer
 
     def create(self, request,*args,**kwargs):
         data = request.data.copy()
@@ -61,6 +67,33 @@ class TimetableViewSet(viewsets.ModelViewSet):
         print(serializer.data)
         d = serializer.data
         for n in d:
-            n['staff'] = Staff.objects.filter(id=n['staff']).values()[0]['name']
+            n['staff_name'] = Staff.objects.filter(id=n['staff']).values()[0]['name']
+        print(d)
         return Response(d)
+
+    @action(detail=False,methods=['get'])
+    def duplicate_check(self,request):
+        staffid = self.request.query_params.get('staff',None)
+        day = self.request.query_params.get('day',None)
+        start_time = self.request.query_params.get('start_time',None)
+        if start_time:
+            si = start_time.split(':')
+            if int(si[0])<6:
+                si[0] = int(si[0])+12
+                start_time = si[0]+':'+si[1]
+        else:
+            start_time = start_time
+        end_time = self.request.query_params.get('end_time',None)
+        start_date = self.request.query_params.get('start_date',None)
+        request_data = Timetable.objects.filter(staff_id=staffid,day=day,start_time=start_time)
+        # removed_value = []
+        # if len(request_data) > 1:
+        #     for dic in request_data:
+        #         removed_value.append(dic.pop('staff_id'))
+        # else:
+        #     removed_value.append(request_data.pop('staff_id'))
+        print(start_time,request_data)
+        serializer = self.get_serializer(request_data,many=True)
+        print("serialized data",serializer.data)
+        return Response(serializer.data)
     

@@ -17,3 +17,8 @@ class TimetableSerializer(serializers.ModelSerializer):
         staff_instance = Staff.objects.get_or_create(**staff_data)
         Timetable_instance = Timetable.objects.create(staff=staff_instance,**validated_data)
         return Timetable_instance'''
+
+class TimetableCreateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Timetable
+        fields = ['staff', 'day', 'start_time', 'end_time', 'start_date']
