@@ -24,10 +24,15 @@ const TimeTableEntry = () => {
     const navigate = useNavigate()
 
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault()
         // const st = new Date('2000:01:01T${startTime}:00').toLocaleTimeString('en-IN',{hour:'2-digit', minute:'2-digit',hour12: true})
         // console.log(JSON.stringify(st),startDate,endTime,day,staffId);
+        const isTimingsUnique = await checkTimingsUnique(staffId,day,startTime,endTime,startDate)
+        if (isTimingsUnique){
+            alert("Duplicate timings for the entry")
+            return;
+        }
         try{
             axios('http://127.0.0.1:8000/api/timetable/',
                 {method: 'POST',    
@@ -40,12 +45,34 @@ const TimeTableEntry = () => {
                 start_date: startDate,
             }),
             });
-        navigate('/')
         }
         catch(error){
             console.log("Error Occured");
         }
-    }
+        navigate('/')
+    };
+        const checkTimingsUnique = async (staffId,day,startTime,endTime,startDate) => {
+            try {
+                const response = await axios.get('http://127.0.0.1:8000/api/timetable/duplicate_check/', {
+                  params: {
+                    staff: staffId,
+                    day: day,
+                    start_time: startTime,
+                    end_time: endTime,
+                    start_date: startDate,
+                  },
+                });
+          
+                // If timings are unique, the response should be an empty array
+                console.log(response.data);
+                return response.data.length;
+              } catch (error) {
+                console.error('Error checking timings uniqueness:', error);
+                // Handle error (e.g., show an error message)
+                return false;
+              }
+            };
+       
 
     return (<>
             <div className='timetable-form'>
@@ -84,6 +111,6 @@ const TimeTableEntry = () => {
             </div>
             </>
     );
-}
+                    }
 
 export default TimeTableEntry;

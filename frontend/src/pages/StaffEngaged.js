@@ -63,7 +63,7 @@ const StaffEngaged = () => {
     return (
        <tr key={index}>
         <td>{index+1}</td>
-        <td>{list.staff}</td>
+        <td>{list.staff_name}</td>
         <td>{list.day}</td>
         <td>{convertTo12HourFormat(list.start_time)}</td>
         <td>{convertTo12HourFormat(list.end_time)}</td>

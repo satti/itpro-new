@@ -1,9 +1,8 @@
 /* Navbar.css */
 
 .navbar {
-    display: flex;
+    display: inline;
     justify-content: space-between;
-    align-items: center;
     background-color: #3498db;
     padding: 5px 10px;
     margin: 0 auto;
@@ -11,7 +10,8 @@
 
   .nav-links {
     display: flex;
-    gap: 30px;
+    flex-wrap: nowrap;
+    gap: 15px;
   }
   
   .navbar > .nav-links > .nav-link {
@@ -19,7 +19,7 @@
     text-decoration: none;
     font-size: 18px;
     transition: color 0.3s;
-    width: 100px;
+    width: 28%;
     text-align: center;
   }
   
