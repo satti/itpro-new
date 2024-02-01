@@ -20,6 +20,26 @@ const TimetableList = () => {
 
     }
 
+    const deleteTimetable = async (id) => {
+      const userConfirmed = window.confirm('Are you sure you want to delete this record');
+      if(userConfirmed){
+      try{
+        console.log('id value',typeof(id));
+      let res = await axios.delete(`http://127.0.0.1:8000/api/timetable/${id}`)
+      alert(`record is deleted successfully ${res.data}`)
+      getStaffList()
+    }catch(error){
+      console.error('Error deleting record', error)
+      alert('Error deleting the record, please try again')
+    }
+      }
+      else{
+        alert('Deletion cancelled!')
+      }
+    }
+
+
+
     function convertToLocaleDate(dateu){
       const [y,m,d] = dateu.split('-')
       return `${d}-${m}-${y}`
@@ -27,7 +47,7 @@ const TimetableList = () => {
       return (
         <div className="container">
             <h1>Timetable List: </h1>
-            <table className="table table-light table-striped">
+            <table className="table table-light table-striped w-75 center">
       <thead>
         <tr>
           <th scope="col">SL. No.</th>
@@ -36,6 +56,7 @@ const TimetableList = () => {
           <th scope="col">Starting Time</th>
           <th scope="col">Ending Time</th>
           <th scope="col">Date of Start</th>
+          <th scope="col">Actions</th>
         </tr>
       </thead>
       <tbody>
@@ -48,6 +69,9 @@ const TimetableList = () => {
             <td>{convertTo12HourFormat(list.start_time)}</td>
             <td>{convertTo12HourFormat(list.end_time)}</td>
             <td>{convertToLocaleDate(list.start_date)}</td>
+            <td><button className='btn btn-danger btn-sm'
+                onClick={()=>deleteTimetable(list.id)}>delete</button></td>
+
            </tr>) 
         })}
       </tbody>
@@ -55,5 +79,6 @@ const TimetableList = () => {
     </div>
   )
 }
+
 
 export default TimetableList

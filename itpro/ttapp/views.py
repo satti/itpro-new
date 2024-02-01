@@ -84,8 +84,18 @@ class TimetableViewSet(viewsets.ModelViewSet):
         else:
             start_time = start_time
         end_time = self.request.query_params.get('end_time',None)
+
+        if end_time:
+            et = end_time.split(':')
+            if int(et[0])<6:
+                et[0] = int(et[0])+12
+                end_time = et[0]+':'+et[1]
+        else:
+            end_time = end_time
+
         start_date = self.request.query_params.get('start_date',None)
-        request_data = Timetable.objects.filter(staff_id=staffid,day=day,start_time=start_time)
+        request_data = Timetable.objects.filter(staff_id=staffid,
+        day=day,start_time__lte=end_time,end_time__gte=start_time)
         # removed_value = []
         # if len(request_data) > 1:
         #     for dic in request_data:

@@ -6,6 +6,8 @@ import './StaffEntry.css'
 const StaffEntry = () => {
     const [staffid,setStaffId] = useState('')
     const [name,setName] = useState('')
+    const [des,setDes] = useState('')
+    const desig= ['HOD','Professor','Associate Professor','Assistant Professor','Computer Assistant','Lab-Techincian']
     const navigate = useNavigate()
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -15,7 +17,8 @@ const StaffEntry = () => {
                 headers: {
                     "Content-Type": 'application/json'},
                 data: JSON.stringify({staffid:staffid,
-                    name:name}),
+                    name:name,
+                    designation:des}),
             });
         navigate('/stafflist')
         }
@@ -37,6 +40,13 @@ const StaffEntry = () => {
                 <label>Staff Name:
                     <input type='text' name="staff-name" value={name} onChange={(e)=>setName(e.target.value)}/>
                 </label>
+                <label for='desgid'>Day :</label>
+                    <select id='desgid' value={des} onChange={(e)=>setDes(e.target.value)}>
+                        <option>Select</option>
+                        {desig.map((des,index)=>{
+                        return (<option value={des} id={index} key={index}>{des}</option>)        
+                        })}
+                    </select>
                 <button className='staff-button' type='submit'> Submit </button>            
                 </form>
             </div>

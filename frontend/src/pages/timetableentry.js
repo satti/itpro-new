@@ -28,9 +28,13 @@ const TimeTableEntry = () => {
         e.preventDefault()
         // const st = new Date('2000:01:01T${startTime}:00').toLocaleTimeString('en-IN',{hour:'2-digit', minute:'2-digit',hour12: true})
         // console.log(JSON.stringify(st),startDate,endTime,day,staffId);
+        if(endTime<startTime){
+            alert(`the start time is larger than end time`)
+            return;
+        }
         const isTimingsUnique = await checkTimingsUnique(staffId,day,startTime,endTime,startDate)
-        if (isTimingsUnique){
-            alert("Duplicate timings for the entry")
+        if (isTimingsUnique.length!==0){
+            alert(`data with ${isTimingsUnique[0].day} start: ${isTimingsUnique[0].start_time} to end: ${isTimingsUnique[0].end_time} inserted`);
             return;
         }
         try{
@@ -40,16 +44,16 @@ const TimeTableEntry = () => {
                     "Content-Type": 'application/json'},
                 data: JSON.stringify({staff:staffId,
                 day:day,
-                start_time:startTime,
+                start_time: startTime,
                 end_time: endTime,
                 start_date: startDate,
             }),
-            });
+            });           
         }
         catch(error){
             console.log("Error Occured");
         }
-        navigate('/')
+        navigate('/timetableList')
     };
         const checkTimingsUnique = async (staffId,day,startTime,endTime,startDate) => {
             try {
@@ -57,15 +61,15 @@ const TimeTableEntry = () => {
                   params: {
                     staff: staffId,
                     day: day,
-                    start_time: startTime,
-                    end_time: endTime,
+                    start_time: endTime,
+                    end_time: startTime,
                     start_date: startDate,
                   },
                 });
           
                 // If timings are unique, the response should be an empty array
                 console.log(response.data);
-                return response.data.length;
+                return response.data;
               } catch (error) {
                 console.error('Error checking timings uniqueness:', error);
                 // Handle error (e.g., show an error message)

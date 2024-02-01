@@ -47,7 +47,7 @@ const StaffEngaged = () => {
       </div>
       <div className='engaged-table'>
         
-        <table className="table table-light table-striped">
+        <table className="table table-light table-striped w-75 center">
   <thead>
     <tr>
       <th scope="col">SL. No.</th>
