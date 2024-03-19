@@ -33,10 +33,16 @@ const TimeTableEntry = () => {
             return;
         }
         const isTimingsUnique = await checkTimingsUnique(staffId,day,startTime,endTime,startDate)
-        if (isTimingsUnique.length!==0){
-            alert(`data with ${isTimingsUnique[0].day} start: ${isTimingsUnique[0].start_time} to end: ${isTimingsUnique[0].end_time} inserted`);
+        console.log("for calculating uniques:",isTimingsUnique)
+        let value = isTimingsUnique.find((element)=>
+            (startTime <= element.end_time && endTime >= element.start_time && endTime < element.end_time)
+        )
+        console.log("form startTime is",startTime,endTime)
+        if(value){
+            alert(`${value.day} with ${value.start_time} and ${value.end_time} already inserted`)
             return;
         }
+        console.log("value is :",value);
         try{
             axios('http://127.0.0.1:8000/api/timetable/',
                 {method: 'POST',    

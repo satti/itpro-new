@@ -1,10 +1,14 @@
 import React, { useState } from 'react'
 import axios from 'axios'
 import './StaffEngaged.css'
+import timetableData from './timetable.js'
+
 const StaffEngaged = () => {
   
   const [selectedDate,setSelectedDate] = useState('')
   const [responseData,setResponseData] = useState([])
+
+  let timeSlots = ['9:40','10:40','11:40','12:40','1:20','2:20','3:20','4:20']
 
   function convertTo12HourFormat(time24){
     const [hours,minutes] = time24.split(':')
@@ -24,8 +28,8 @@ const StaffEngaged = () => {
     e.preventDefault()
       try{
         const response = await axios.get(`http://127.0.0.1:8000/api/timetable/staff_engaged/?date=${selectedDate}`)
-        setResponseData(response.data)
-        console.log(response.data)
+        setResponseData(timetableData)
+        console.log(timetableData)
       }
     
       catch(error){
@@ -45,35 +49,51 @@ const StaffEngaged = () => {
       <button type='submit'>Get</button>
       </form>
       </div>
-      <div className='engaged-table'>
-        
-        <table className="table table-light table-striped w-75 center">
-  <thead>
-    <tr>
-      <th scope="col">SL. No.</th>
-      <th scope="col">Staff Name</th>
-      <th scope="col">Week Day</th>
-      <th scope="col">Starting Time</th>
-      <th scope="col">Ending Time</th>
-      <th scope="col">Date of Start</th>
-    </tr>
-  </thead>
-  <tbody>
-  {responseData.map((list,index)=>{
-    return (
-       <tr key={index}>
-        <td>{index+1}</td>
-        <td>{list.staff_name}</td>
-        <td>{list.day}</td>
-        <td>{convertTo12HourFormat(list.start_time)}</td>
-        <td>{convertTo12HourFormat(list.end_time)}</td>
-        <td>{convertToLocaleDate(list.start_date)}</td>
-       </tr>) 
-    })}
-  </tbody>
-</table>
-      </div>
-      </div>
+        {timetableData.map((staffEntry) => (
+        <div key={staffEntry.staff.staffid}>
+          <h2>{staffEntry.staff.name}'s Timetable</h2>
+          <table className='table table-striped w-75 center table-light table-bordered' >
+            <thead>
+              <tr>
+                <th>Day</th>
+                {timeSlots.map((timeSlot) => (
+                  <th key={timeSlot}>{timeSlot}</th>
+                ))}
+                {/* Add other table headers as needed */}
+              </tr>
+            </thead>
+            <tbody>
+              {Object.entries(staffEntry.timetable).map(([day, entries]) => (
+                <tr key={`${staffEntry.staff.staffid}-${day}`}>
+                  <td>{day}</td>
+                  {timeSlots.map((timeSlot, index) => {
+                    const matchingEntry = entries.find(
+                      (entry) => entry.start_time === timeSlot
+                    );
+
+                    if (matchingEntry) {
+                      // If an entry matches the current time slot
+                      const colSpan = entries.findIndex(
+                        (entry) => entry.start_time !== timeSlot
+                      );
+                      // colSpan will be the number of continuous entries
+                      return (
+                        <td key={index} colSpan={colSpan + 1}>
+                          {`${matchingEntry.start_time} - ${matchingEntry.end_time}`}
+                        </td>
+                      );
+                    } else {
+                      // If no entry matches, render an empty cell
+                      return <td key={index}></td>;
+                    }
+                  })}
+                  {/* Add other table cells as needed */}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>))}
+        </div>
     </>
   )
 }

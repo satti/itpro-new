@@ -95,7 +95,7 @@ class TimetableViewSet(viewsets.ModelViewSet):
 
         start_date = self.request.query_params.get('start_date',None)
         request_data = Timetable.objects.filter(staff_id=staffid,
-        day=day,start_time__lte=end_time,end_time__gte=start_time)
+        day=day)
         # removed_value = []
         # if len(request_data) > 1:
         #     for dic in request_data:
