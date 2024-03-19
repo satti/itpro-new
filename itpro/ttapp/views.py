@@ -68,6 +68,7 @@ class TimetableViewSet(viewsets.ModelViewSet):
         d = serializer.data
         for n in d:
             n['staff_name'] = Staff.objects.filter(id=n['staff']).values()[0]['name']
+            n['start_time'] = n['start_time'][0:5]
         print(d)
         return Response(d)
 
