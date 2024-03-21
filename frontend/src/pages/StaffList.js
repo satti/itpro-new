@@ -5,7 +5,7 @@ const StaffList = () => {
     const [editingStaffId, setEditingStaffId] = useState(null);
 useEffect(()=>{
     getStaffList();
-},[])
+},[lists])
 
 const deleteStaff = async (id) => {
   const userConfirmed = window.confirm('Are you sure you want to delete this record');

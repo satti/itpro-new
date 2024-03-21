@@ -68,8 +68,14 @@ class TimetableViewSet(viewsets.ModelViewSet):
         d = serializer.data
         for n in d:
             n['staff_name'] = Staff.objects.filter(id=n['staff']).values()[0]['name']
-            n['start_time'] = n['start_time'][0:5]
-        print(d)
+            if int(n['start_time'].split(":")[0]) > 12:
+                n['start_time'] = (str(int(n['start_time'].split(":")[0]) - 12))+":"+(n['start_time'].split(":")[1]) 
+            else:
+                n['start_time'] = n['start_time'][0:5]
+            if int(n['end_time'].split(":")[0]) > 12:
+                n['end_time'] = (str(int(n['end_time'].split(":")[0]) - 12))+":"+(n['end_time'].split(":")[1]) 
+            else:
+                n['end_time'] = n['end_time'][0:5]
         return Response(d)
 
     @action(detail=False,methods=['get'])

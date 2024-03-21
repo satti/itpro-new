@@ -58,3 +58,47 @@
     margin-left: auto;
     margin-right: auto;
 }
+
+
+.table .allotted {
+    background-color: red;
+    opacity: 0.4;
+    color: white;
+    font-size: large;
+    text-align: center;
+}
+
+.table .not-allotted {
+    background-color: green;
+    opacity: 0.4;
+    color: white;
+    font-size: large;
+    text-align: center;
+}
+
+.table .table-header {
+    background-color: rgb(2, 2, 71);
+    opacity: 0.8;
+    color: white;
+    font-weight: bold;
+    text-align: center;
+}
+
+.table .staff-data {
+    background-color: rgb(1, 32, 32);
+    opacity: 0.8;
+    color: white;
+    font-weight: bold;
+    text-align: center;
+}
+
+.table {
+    margin-top: 5px;
+}
+
+.staff-list-h1 {
+    font-size: 30px;
+    color: rgb(204, 17, 142);
+    text-align: center;
+    margin-top: 20px;
+}
