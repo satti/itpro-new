@@ -40,7 +40,7 @@ const StaffEntry = () => {
                 <label>Staff Name:
                     <input type='text' name="staff-name" value={name} onChange={(e)=>setName(e.target.value)}/>
                 </label>
-                <label for='desgid'>Day :</label>
+                <label for='desgid'>Designation :</label>
                     <select id='desgid' value={des} onChange={(e)=>setDes(e.target.value)}>
                         <option>Select</option>
                         {desig.map((des,index)=>{

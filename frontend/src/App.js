@@ -15,10 +15,10 @@ function App() {
       <BrowserRouter>
         <Navbar />
         <Routes>
+          <Route path='/staffentry' Component={StaffEntry}> </Route>
+          <Route path='/stafflist' Component={StaffList}> </Route>
           <Route path='/entry' Component={TimeTableEntry}> </Route>
           {/* <Route path='/create' element={<SubCreate /> } exact></Route> */}
-          <Route path='/stafflist' Component={StaffList}> </Route>
-          <Route path='/staffentry' Component={StaffEntry}> </Route>
           <Route path='/timetablelist' Component={TimetableList}></Route>
           <Route path='/staffengaged' Component={StaffEngaged}></Route>
         </Routes>
