@@ -62,7 +62,7 @@ class TimetableViewSet(viewsets.ModelViewSet):
         print(request_date)
         date_object = datetime.strptime(request_date,'%Y-%m-%d')
         day = date_object.strftime('%A')
-        queryset = Timetable.objects.filter(day=day)
+        queryset = Timetable.objects.filter(day=day).filter(start_date__lte=date_object)
         serializer = self.get_serializer(queryset,many=True)
         print(serializer.data)
         d = serializer.data
