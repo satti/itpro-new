@@ -7,12 +7,14 @@ import StaffList from './pages/StaffList';
 import StaffEntry from './pages/StaffEntry';
 import TimetableList from './pages/TimetableList';
 import StaffEngaged from './pages/StaffEngaged';
+import { AuthProvider } from './context/AuthContext';
 //import SubCreate from './pages/SubCreate'
 
 function App() {
   return (
     <div className="App">
       <BrowserRouter>
+        <AuthProvider>
         <Navbar />
         <Routes>
           <Route path='/staffentry' Component={StaffEntry}> </Route>
@@ -22,6 +24,7 @@ function App() {
           <Route path='/timetablelist' Component={TimetableList}></Route>
           <Route path='/staffengaged' Component={StaffEngaged}></Route>
         </Routes>
+        </AuthProvider>
       </BrowserRouter>
     </div>
   );

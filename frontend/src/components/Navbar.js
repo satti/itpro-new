@@ -1,8 +1,10 @@
-import React from "react";
+import React, {useContext} from "react";
 import { NavLink } from "react-router-dom";
+import AuthContext from "../context/AuthContext";
 import './navbar.css';
 
 const Navbar = () => {
+  const {name} = useContext(AuthContext)
   return (
     <div className="container">
     <nav className="navbar">
@@ -15,7 +17,7 @@ const Navbar = () => {
       <NavLink to="/staffengaged" className="nav-link" activeClassName="active-link">StaffEngaged</NavLink>
       </div>
     </nav>
-
+    <p>Hello {name}!</p>
 </div>
     )
 }
